@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ckb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>کەپرەکانم - سیستەمی بەڕێوەبردنی کەپر</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+  <div class="login-container" id="loginContainer">
+    <div class="card login-card">
+      <h1>🏕️ کەپرەکانم</h1>
+      <h2>چونەژوورەوە</h2>
+      <input type="text" id="loginUsername" placeholder="ناوی بەکارهێنەر" autocomplete="off">
+      <input type="password" id="loginPassword" placeholder="پاسوۆرد">
+      <button onclick="login()">چونەژوورەوە</button>
+      <div id="loginError" class="error-msg"></div>
+    </div>
+  </div>
+
+  <div class="main-container" id="mainContainer" style="display: none;">
+    <div class="header">
+      <h1>🏕️ کەپرەکانم</h1>
+      <button class="logout-btn" onclick="logout()">🚪 دەرچوون</button>
+    </div>
+    
+    <div class="dashboard">
+      <div class="card stat-card">
+        <h3>📊 کۆی کەپرەکان</h3>
+        <div class="stat-number" id="totalCount">0</div>
+      </div>
+      <div class="card stat-card success">
+        <h3>🟢 بەردەست</h3>
+        <div class="stat-number" id="availableCount">0</div>
+      </div>
+      <div class="card stat-card danger">
+        <h3>🔴 گیراو</h3>
+        <div class="stat-number" id="rentedCount">0</div>
+      </div>
+      <div class="card stat-card add-card" onclick="openAddModal()">
+        <h3>➕ زیادکردن</h3>
+        <div class="stat-number">+</div>
+      </div>
+    </div>
+
+    <div class="kapre-list" id="kapreList"></div>
+  </div>
+
+  <div id="addModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeAddModal()">&times;</span>
+      <h3>➕ زیادکردنی کەپر</h3>
+      <input type="text" id="kapreName" placeholder="ناوی کەپر (وەک A-01)">
+      <select id="kapreType">
+        <option value="بچوک">بچوک - 35,000 دینار</option>
+        <option value="گەورە">گەورە - 50,000 دینار</option>
+        <option value="زۆر گەورە">زۆر گەورە - 75,000 دینار</option>
+      </select>
+      <button onclick="addKapre()">زیادکردن</button>
+      <div id="addError" class="error-msg"></div>
+    </div>
+  </div>
+
+  <div id="rentModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeRentModal()">&times;</span>
+      <h3>📝 تۆمارکردنی کرێ</h3>
+      <div id="rentKapreInfo"></div>
+      <input type="text" id="customerName" placeholder="ناوی کڕیار">
+      <input type="tel" id="customerPhone" placeholder="ژمارەی مۆبایل">
+      <button onclick="confirmRent()">تۆمارکردن</button>
+      <div id="rentError" class="error-msg"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
